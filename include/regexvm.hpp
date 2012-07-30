@@ -9,7 +9,7 @@ class IRegexVM
 {
 public:
 
-	virtual int Run(Instruction* pc, char* sp) = 0;
+	virtual int Run(Instruction* program, char* input) = 0;
 };
 
 REGEX_VM_NAMESPACE_END

@@ -7,7 +7,7 @@ REGEX_VM_NAMESPACE_BEGIN
 
 typedef enum
 {
-	CHAR,
+	LITERAL,
 	MATCH,
 	JMP,
 	SPLIT
@@ -15,6 +15,7 @@ typedef enum
 
 class Instruction
 {
+public:
 	OPCODE Opcode;
 	int c;
 	Instruction* x;
