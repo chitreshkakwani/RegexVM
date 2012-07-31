@@ -1,5 +1,7 @@
 #include "backtrackingvm.hpp"
+#include <iostream>
 
+using namespace std;
 using namespace REGEX_VM_NAMESPACE;
 
 int BacktrackingVM::Run(Instruction* program, char* input)
@@ -26,7 +28,7 @@ int BacktrackingVM::Run(Instruction* program, char* input)
 			{
 			case LITERAL:
 				{
-					if(*sp != *input)
+					if(*sp != pc->c)
 					{
 						/* Literal doesn't match the character pointed at by stack pointer */	
 						failed = true;
@@ -53,14 +55,17 @@ int BacktrackingVM::Run(Instruction* program, char* input)
 					/* Create a thread with branched instruction and push it in the stack */
 					if(stackSize == MAXTHREADS)
 						throw "Stack overflow";
-					threadStack[stackSize] = Thread(pc->y, sp);
+					threadStack[stackSize++] = Thread(pc->y, sp);
 					pc = pc->x;
 					continue;
 				}
 			}
 
 			if(failed)
+			{
 				break;
+			}
 		}
 	}
+	return 0;
 }
